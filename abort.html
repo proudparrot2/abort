@@ -1,0 +1,81 @@
+<!-- Abort v1 by proudparrot2 -->
+
+<script src="https://kit.fontawesome.com/e897e5d5dc.js" crossorigin="anonymous"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
+  #abortBadge {
+    position: fixed;
+    cursor: pointer;
+    bottom: 5px;
+    right: 5px;
+    z-index: 1000;
+  }
+  
+  .button {
+    padding: 15px;
+    border: none;
+    background-color: #E1E1E1;
+    color: #130F26;
+    border-radius: 15px;
+    font-family: "DM Sans";
+    font-size: 14px;
+  }
+
+  .button {
+    opacity: 0.75;
+    transition-property: opacity, transform;
+    transition: opacity 120ms, transform 120ms;
+    transition-timing-function: ease-out;
+  }
+
+  .button:hover {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+</style>
+
+<div id="abortBadge">
+  <button class="button" id="abortBtn" onclick="ActivateAbort()"><i class="fa-solid fa-arrow-right-to-bracket"></i> Abort</button>
+  <button class="button" id="settingsBtn" onclick="ChangeAbort()"><i class="fa-solid fa-gear"></i> Settings</button>
+</div>
+
+<script>
+
+
+  function ActivateAbort() {
+    
+    window.parent.window.location.replace(`${localStorage.getItem("url")}`);
+    
+  }
+  
+  function ChangeAbort() {
+    while (1) {
+      var select = prompt("Welcome to the Abort settings screen! \n\nType 1 to change your url \nType 2 to see your current Abort url \nClick the cancel button to exit")
+  
+      if (select == "1") {
+        var link = prompt("Please enter a new link:")
+        
+        if (!link || !link.startsWith('https://')) {
+          alert("Invalid link provided!")
+          
+        } else {
+          localStorage.setItem("url", link)
+          var confirmedlink = localStorage.getItem("url")
+          alert("You have successfully set your Abort url to " + confirmedlink + ".")
+        }
+        
+      } else if (select == "2") {
+        alert(`Your current Abort url is ${localStorage.getItem("url")}`)
+        
+      } else if (select == null) {
+        break
+        
+      } else {
+        alert("Invalid option provided!")
+      }
+    }
+  
+    
+  }
+</script>
